@@ -1,14 +1,14 @@
-const express = require('express')
-const dotenv = require('dotenv')
-const products = require('./data/products')
+import express from 'express'
+import dotenv from 'dotenv'
+import products from './data/products.js'
 
 dotenv.config()
 
-const cors = require('cors')
+// const cors = require('cors')
 
 const app = express()
 
-app.use(cors())
+// app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
