@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 const Rating = ({ value, text, color }) => {
   return (
@@ -64,21 +63,13 @@ const Rating = ({ value, text, color }) => {
           }
         ></i>
       </span>
-      {/* && = if has text show text. ternary w/o else*/}
       <span>{text && text}</span>
     </div>
   )
 }
 
-// Default prop declaration
 Rating.defaultProps = {
   color: '#f8e825',
 }
 
-// Defining data type of each Props
-// Rating.propTypes = {
-//   value: PropTypes.number.isRequired,
-//   text: PropTypes.string.isRequired,
-//   color: PropTypes.string,
-// }
 export default Rating

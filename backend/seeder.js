@@ -1,13 +1,12 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import color from 'colors'
+import colors from 'colors'
 import users from './data/users.js'
 import products from './data/products.js'
 import User from './models/userModel.js'
 import Product from './models/productModel.js'
 import Order from './models/orderModel.js'
 import connectDB from './config/db.js'
-import { object } from 'webidl-conversions'
 
 dotenv.config()
 
@@ -19,15 +18,12 @@ const importData = async () => {
     await Product.deleteMany()
     await User.deleteMany()
 
-    const createdUser = await User.insertMany(users)
+    const createdUsers = await User.insertMany(users)
 
-    const adminUser = createdUser[0]._id
+    const adminUser = createdUsers[0]._id
 
     const sampleProducts = products.map((product) => {
-      return {
-        ...product,
-        user: adminUser,
-      }
+      return { ...product, user: adminUser }
     })
 
     await Product.insertMany(sampleProducts)
@@ -54,13 +50,8 @@ const destroyData = async () => {
   }
 }
 
-/*
-    process.argv[0] == "path/to/node"
-    process.argv[1] == "path/to/myprogram.js"
-    process.argv[2] == "firstarg"
-    process.argv[3] == "secondarg"
-    The process. argv property is an inbuilt application programming interface of the process module 
-    which is used to get the arguments passed to the node. js process when run in the command line
-*/
-
-process.argv[2] === '-d' ? destroyData() : importData()
+if (process.argv[2] === '-d') {
+  destroyData()
+} else {
+  importData()
+}
