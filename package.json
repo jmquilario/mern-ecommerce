@@ -4,7 +4,7 @@
   "description": "MERN shopping cart app",
   "main": "server.js",
   "type": "module",
-  "private":true,
+  "private": true,
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
