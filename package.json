@@ -4,6 +4,7 @@
   "description": "MERN shopping cart app",
   "main": "server.js",
   "type": "module",
+  "private":true,
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
@@ -12,6 +13,10 @@
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:jmq/c3/ecommerce-mern.git"
   },
   "author": "Jm Quilario",
   "license": "MIT",
