@@ -33,15 +33,17 @@ const ProductScreen = ({ history, match }) => {
   } = productReviewCreate
 
   useEffect(() => {
-    if (successProductReview) {
-      setRating(0)
-      setComment('')
+    if (!userInfo.IsAdmin) {
+      if (successProductReview) {
+        setRating(0)
+        setComment('')
+      }
+      if (!product._id || product._id !== match.params.id) {
+        dispatch(listProductDetails(match.params.id))
+        dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
+      }
     }
-    if (!product._id || product._id !== match.params.id) {
-      dispatch(listProductDetails(match.params.id))
-      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
-    }
-  }, [product._id, dispatch, match, successProductReview])
+  }, [userInfo, product._id, dispatch, match, successProductReview])
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`)
@@ -139,7 +141,7 @@ const ProductScreen = ({ history, match }) => {
                       onClick={addToCartHandler}
                       className='btn-block'
                       type='button'
-                      disabled={product.countInStock === 0}
+                      disabled={product.countInStock === 0 || userInfo.IsAdmin}
                     >
                       Add To Cart
                     </Button>
